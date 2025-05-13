@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Clasificador de Clientes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Clasificador de Clientes</h1>
+    <button id="btnClasificar">Clasificar</button>
+    <p id="resultado"></p>
+
+    <script>
+        document.getElementById('btnClasificar').addEventListener('click', () => {
+            fetch('/clasificar', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ cliente: 'ejemplo' })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('resultado').textContent = data.mensaje;
+            })
+            .catch(error => {
+                document.getElementById('resultado').textContent = 'Error al clasificar: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>
